@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+
+  <title>Macy's Product-Details Application</title>
+</head>
+
+<body>
+
+  <!-- Backbone demo.
+	1. This is a product details page.
+	2. The customer has selected a dress to buy.
+	3. Customer launches this page that has following details - 
+		i) Product image - this can be anything. Please keep it family friendly.
+		ii) Size 
+		iii Color
+		iV) Quantity
+	4. You can use any selection method. Doesn't have to be dropdown. 
+		If you keep this as dropdown selection, that is fine.
+	5. When selection of attributes is done, customer should enter shipping address.
+	6. When user clicks on finish button, show the summary of the selected data.
+	
+	Expected libraries:
+	1. Backbone
+	2. Marionette (Optional) - not required, but nice to have.
+	3. Handlebars (Optional) - not required, but nice to have.
+	4. jQuery (Optional) - not required, but nice to have.
+	5. CSS - any library of your choice.
+	
+	Expected:
+	1. Validations.
+	2. View management
+	3. Data management
+	4. Should be able to explain design decisions.
+-->
+  <div class="container" id="main-container">
+    <div class="card1">
+      <h1 class="main-title">This is Backbone Demo.</h1>
+    </div>
+  </div>
+  <!-- required libraries -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+  <script src="scripts/app.js"></script>
+
+  <!-- Product details page template -->
+  <script id="productDetailsTemplate" type="text/x-handlebars-template">
+    <div class="container">
+      <div class="card">
+        <div class="wrapper row">
+          <h4 class="product-title">Product :{{title}} </h4>
+          <div class="col-md-6">
+            <img src="{{imageURL}}" id="pic-1" />
+          </div>
+          <div class="product__details col-md-6">
+              <div class="form-group" id="color">
+                <h5 class="color">Colors:</h5>
+                {{#each colorChoices}}
+                <label class="radio-inline">
+                  <input type="radio" name="colors" value={{this}} {{#if @first}}checked{{/if}}> {{this}}
+                  <span class=""></span>
+                </label>
+                {{/each}}
+                </div>
+                <br>
+              <div class="form-group" id="size">
+                <h5 class="size">Sizes:</h5>
+                {{#each sizeChoices}}
+                <label class="radio-inline">
+                  <input type="radio" name="sizes" value={{value}} {{#if @first}}checked{{/if}}> {{text}}
+                  <span class=""></span>
+                </label>
+                {{/each}}
+               </div>
+               <br>
+              <div class="form-group" id=" quantity">
+                <h6 class="quantity">Quantity</h6>
+                {{#each quantity}}
+                <label class="radio-inline">
+                  <input type="radio" name="qty" value={{this}} {{#if @first}}checked{{/if}}> {{this}}
+                  <span class=""></span>
+                </label>
+                {{/each}}
+              </div> 
+              <p class="incorrect_details hidden">Product details are incorrect.</p>
+              <button type="button" class=" btn btn-primary float-right" id="address-view">Next</button>
+              <div style="clear: both;"></div>
+            </div>
+          </div>
+        </div>
+  </script>
+<!-- shipping-address template -->
+  <script id="ShippingAddressTemplate" type="text/x-handlebars-template">
+    <div class="container">
+      <div class="card">
+        <h4 class="shipping-header"> Shipping Address</h4>
+        <div class="form-group">
+          <label class="col-form-label" for="inputDefault">Address Line1</label>
+          <input type="text" class="form-control" name="address1" placeholder="Street Address">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label" for="inputDefault">Address Line1</label>
+          <input type="text" class="form-control" name="address2" placeholder="Apt#">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label" for="inputDefault">City</label>
+          <input type="text" class="form-control" name="city" placeholder="City">
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <label class="col-form-label" for="inputDefault">State</label>
+            <input type="text" class="form-control" name="state" placeholder="State">
+          </div>
+          <div class="form-group col-sm-6">
+            <label class="col-form-label" for="inputDefault">ZipCode</label>
+            <input type="number" class="form-control" name="zipcode" placeholder="Zipcode">
+          </div>
+        </div>
+        <div>
+            <p class="incorrect_details hidden">Address is incorrect.</p>
+            <button class="button_thr btn btn-primary " type="button" id="place-order">Finish</button>
+          <div style="clear: both;"></div>
+        </div>
+      </div>
+    </div>
+  </script>
+<!-- Place-order template -->
+  <script id="orderDetailsTemplate" type="text/x-handlebars-template">
+    <div class="container ">
+      <div class="card">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card-header"> Product Details:</div>
+            </br>
+            <div class="thumbnail">
+              <h4> <strong>Product:</strong>  {{title}}</h4>
+              <p>
+                <strong>Color:</strong>  {{colors}}</p>
+              <p>
+                <strong>Size:</strong> {{sizes}}</p>
+              <p>
+                <strong>Quantity:</strong> {{qty}}</p>
+            </div>
+          </div>
+       
+          <div class="col-sm-6">
+            <div class="card-header"> Shipping Address:</div>
+            </br>
+            <div class="thumbnail">
+              <p>
+                <strong>Street:</strong> {{address1}}, {{address2}}</p>
+              <p>
+                <strong>City:</strong>  {{city}}</p>
+              <p>
+                <strong>State:</strong> {{state}}</p>
+              <p>
+                <strong>ZIP Code:</strong> {{zipcode}} </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </script>
+  <script>
+  </script>
+
+</body>
+</html>

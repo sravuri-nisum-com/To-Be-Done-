@@ -1,0 +1,125 @@
+
+input {
+  box-sizing: border-box;
+}
+
+.hidden, .hidden.hidden {
+  display: none;
+}
+
+html {
+  position: relative;
+}
+
+
+.container {
+  margin: 2em auto;
+  width: 50%;
+}
+
+.product-title {
+  font-size: 1.8em;
+  line-height: 1.2em;
+  color:rgb(14, 3, 27);
+}
+/* .mc-demo {
+  background-color: #f5f5f5;
+  border: 1px solid lightblue;
+  
+} */
+.card{
+  margin-top: 5%;
+  margin-left:15%;
+  background: rgb(213, 227, 233);
+  padding: 3em;
+  line-height: 1.5em;
+  max-width: 70%;
+  border: 1px solid #2bafc7;
+}
+/* have to adjust  */
+.card1{ 
+  margin: 10px 10px 10px 10px;
+   background: rgb(245, 247, 248);
+  padding: 0.5em;
+  line-height: 1.5em;
+  max-width: 100%;
+  border: 1px solid #2bafc7;
+
+}
+.main-title{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 3em;
+  color:#0789a0;
+  text-align: center;
+}
+
+
+.product-title {
+  margin-bottom: 15px;
+  margin-left:20%; 
+  margin-top: -3%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 2em;
+  color:#0789a0;
+}
+.color, .size ,.quantity{
+    text-transform: uppercase;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+
+}
+.radio-inline{
+  padding-left:1%;
+  margin-left:10%;
+  /* margin:3% 1% 10% 0%; */
+}
+
+
+.btn-primary{
+      float: right;
+      margin:10% 1% 10% 1%; 
+  }
+.thumbnail{
+      background-color: rgb(237, 241, 243) !important;
+  }
+.thumbnail p{
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+#pic-1{
+      width:90%;
+      max-width:width;
+  }
+.product__details {
+      margin-top:5%;
+  }
+.custom-select{
+  width:25%;
+  }
+
+/* Address-Template  CSS*/
+.form-group input{
+  border: 1px solid darkgrey;
+border-radius: 5px;
+color: darkgrey;
+margin: 0.3em 0 1em 0;
+padding: 0.5em 0.5em;
+width: 100%;
+}
+.card-header, .shipping-header {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 2em;
+ 
+   color:#0789a0 
+}
+.shipping-header{
+  text-align: center;
+}
+.col-form-label{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.incorrect_details {
+  color: rgba(230, 58, 15, 0.678);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 1em;
+  /* font-weight: bold; */
+}
